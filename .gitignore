@@ -1,0 +1,67 @@
+# ─── Ambientes virtuais Python ──────────────────────────────────────────────
+.venv/
+venv/
+env/
+ENV/
+.python-version
+
+# ─── Cache e build do Python ────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+*.egg-info/
+*.egg
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# ─── Jupyter Notebook ───────────────────────────────────────────────────────
+.ipynb_checkpoints/
+*-checkpoint.ipynb
+.jupyter/
+
+# ─── Dados (reproduzíveis via extrair_api_certbr.py) ────────────────────────
+# A pasta dados_certbr/ NÃO é versionada porque pode ser regenerada
+# a qualquer momento rodando o script. Veja o README para instruções.
+dados_certbr/
+
+# ─── Saídas e artefatos ─────────────────────────────────────────────────────
+*.log
+*.tmp
+output/
+exports/
+figuras_geradas/
+
+# ─── Configurações de IDE ───────────────────────────────────────────────────
+# VS Code: ignora configurações pessoais, mas mantém recomendações do projeto
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+!.vscode/launch.json
+
+.idea/
+*.swp
+*.swo
+*~
+
+# ─── Arquivos do sistema operacional ────────────────────────────────────────
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# ─── Credenciais (segurança — nunca commite isso) ───────────────────────────
+.env
+.env.local
+*.key
+*.pem
+credentials.json
+secrets.json
