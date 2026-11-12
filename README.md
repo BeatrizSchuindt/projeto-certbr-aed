@@ -5,10 +5,10 @@ Pesquisa exploratória sobre incidentes de segurança notificados ao CERT.br
 no contexto da disciplina de **Segurança de Sistemas de Computação** do curso
 de Engenharia da Computação do **IFMT Campus Cuiabá**.
 
-> **Nesta branch (`feat/analise-estatistica`)** está a parte de análise
-> estatística do artigo: o script `analise_estatistica.py`, com os testes de
-> Mann-Kendall e Kruskal-Wallis, a decomposição STL e a identificação de meses
-> atípicos. Veja o passo 7 de [Como executar](#como-executar-passo-a-passo).
+> A **análise estatística** do artigo está no script `analise_estatistica.py`,
+> com os testes de Mann-Kendall e Kruskal-Wallis, a decomposição STL e a
+> identificação de meses atípicos. Veja o passo 7 de
+> [Como executar](#como-executar-passo-a-passo).
 
 ## Fonte dos dados
 
