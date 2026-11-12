@@ -5,6 +5,11 @@ Pesquisa exploratória sobre incidentes de segurança notificados ao CERT.br
 no contexto da disciplina de **Segurança de Sistemas de Computação** do curso
 de Engenharia da Computação do **IFMT Campus Cuiabá**.
 
+> **Nesta branch (`feat/analise-estatistica`)** está a parte de análise
+> estatística do artigo: o script `analise_estatistica.py`, com os testes de
+> Mann-Kendall e Kruskal-Wallis, a decomposição STL e a identificação de meses
+> atípicos. Veja o passo 7 de [Como executar](#como-executar-passo-a-passo).
+
 ## Fonte dos dados
 
 Os dados são extraídos da API interna do CERT.br em
@@ -21,6 +26,7 @@ projeto-certbr/
 ├── README.md
 ├── extrair_api_certbr.py      # Script de extração dos dados
 ├── aed_apresentacao.ipynb     # Notebook da análise exploratória
+├── analise_estatistica.py     # Testes estatísticos (Mann-Kendall, Kruskal-Wallis, STL)
 └── dados_certbr/              # Gerado pelo script (ignorado pelo Git)
     ├── raw/                   # Arquivos .txt brutos da API
     └── *.csv                  # CSVs processados (1 por gráfico do site)
@@ -109,6 +115,49 @@ Concluído. Arquivos em: /caminho/projeto-certbr/dados_certbr
 
 ```bash
 jupyter notebook aed_apresentacao.ipynb
+```
+
+### 7. Rodar a análise estatística
+
+O script `analise_estatistica.py` reproduz os testes estatísticos do artigo
+sobre o total mensal de notificações (jan/2016 a abr/2026, 124 meses):
+
+| Etapa | Métodos |
+|---|---|
+| Tendência | Mann-Kendall nos totais anuais (2016–2025) e Mann-Kendall sazonal na série mensal, com inclinação de Sen |
+| Sazonalidade | Kruskal-Wallis na série bruta e na série sem tendência, decomposição STL robusta e força da sazonalidade (F_S) |
+| Meses atípicos | Limite do IQR e identificador de Hampel |
+
+Os meses atípicos (jul/2017 e jun/2019) são mantidos em todos os testes.
+
+O script usa bibliotecas que não estão no passo 4. Instale-as antes:
+
+```bash
+pip install scipy statsmodels pymannkendall
+```
+
+Depois, com os dados já extraídos (passo 5), rode:
+
+```bash
+python analise_estatistica.py
+```
+
+O resultado sai no terminal, em três blocos. Trecho da saída esperada:
+
+```
+=== 1. TENDÊNCIA (Mann-Kendall) ===
+Anual (2016–2025, n = 10): tau = -0,467; p = 0,074 -> sem tendência significativa
+Sazonal (124 meses): tau = -0,228; p = 0,0013 -> decrescente
+  Inclinação de Sen: -1.188 notificações/ano (no mesmo mês)
+
+=== 2. SAZONALIDADE ===
+Kruskal-Wallis, série bruta: H = 13,67; p = 0,252
+Força da sazonalidade (STL): F_S = 0,125
+Kruskal-Wallis, série sem tendência: H = 17,78; p = 0,087
+
+=== 3. MESES ATÍPICOS ===
+IQR: limite superior = 74.074; 5 meses acima:
+Hampel (|z| > 3,5): 2 meses atípicos
 ```
 
 ## Sobre os datasets gerados
